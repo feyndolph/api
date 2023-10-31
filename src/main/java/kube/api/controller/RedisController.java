@@ -13,7 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.extern.slf4j.Slf4j;
+
+
+
 @RestController
+@Slf4j
 public class RedisController {
     
     @Autowired
@@ -49,6 +54,8 @@ public class RedisController {
 
     @GetMapping("/getSessionId")
     public String getSessionId(HttpSession httpSession){
+        String sessionId = (String)httpSession.getAttribute("sessionID");
+        System.out.println(sessionId);
         return httpSession.getId();
     }
 }
