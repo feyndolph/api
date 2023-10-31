@@ -1,10 +1,13 @@
 package kube.api.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,5 +31,24 @@ public class RedisController {
         ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
         String value = valueOperations.get(key);
         return new ResponseEntity<>(value, HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @PostMapping("/login")
+    public ResponseEntity<?> login(HttpSession httpSession){
+        httpSession.setAttribute("uid", "1111");
+        return new ResponseEntity<>("로그인 성공", HttpStatus.OK);
+    }
+
+    @PostMapping("/sessionTest")
+    public String sessionTest(HttpSession httpSession){
+        String id = "test123";
+        httpSession.setAttribute("sessionID", id);
+        return "session Test";
+    }
+
+    @GetMapping("/getSessionId")
+    public String getSessionId(HttpSession httpSession){
+        return httpSession.getId();
     }
 }
