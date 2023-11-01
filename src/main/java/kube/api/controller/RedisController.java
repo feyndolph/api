@@ -56,6 +56,7 @@ public class RedisController {
     public String getSessionId(HttpSession httpSession){
         String sessionId = (String)httpSession.getAttribute("sessionID");
         System.out.println(sessionId);
+        System.out.println(sessionId);
         return httpSession.getId();
     }
 }
