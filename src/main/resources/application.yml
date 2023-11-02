@@ -8,3 +8,8 @@ server:
 logging:
   level:
     root: INFO
+
+spring:
+  redis:
+    host: 210.110.162.185
+    port: 30005
